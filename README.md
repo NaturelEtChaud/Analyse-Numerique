@@ -7,6 +7,12 @@ Le but était de faire peu de théorie et surtout beaucoup de pratique. Donc vou
 Tous les exercices et programmes sont corrigés sur le document à partir de la page 83.
 
 ---
+
+## Avertissement !
+C'est certain, il reste quelques coquilles ou fautes de frappe. Soyez indulgent.
+
+
+---
 Si un jour j'ai le temps, je réécrirai mes codes en Python.
 
 J'avais aussi dans l'idée de programmer en P5JS le mouvement du pendule d'après son équation différentielle vue par la méthode d'Euler puis par la méthode de Runge-Kutta pour bien interpréter l'erreur commise par la méthode d'Euler.
