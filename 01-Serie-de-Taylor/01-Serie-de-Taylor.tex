@@ -1,0 +1,237 @@
+\chapter{\textit{(Quelques petits rappels autour de la)} Série de Taylor}
+
+\section{Dérivées d'ordre supérieur}
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{defi}[Dérivabilité]
+Soit $f$ une fonction numérique définie sur un intervalle $I$ de $\mathbb{R}$.\\
+Soit $a\in I$. On dit que \textcolor{red}{\textbf{$f$ est dérivable en $a$}} si, et seulement si, le rapport :
+$$\tau_a(f) = \dfrac{f(a+h)-f(a)}{h}$$
+admet une limite finie lorsque $h$ tend vers $0$.\\
+Dans ce cas on note \textcolor{red}{$f'(a)$} cette limite.
+\end{defi}\end{minipage}}
+
+\medskip
+
+\begin{exem}
+Prenons la fonction $f(x)=x^2$ et $a$ un réel. Pour tout $h$, on a :
+\begin{align*}
+f(a+h)
+&= (a+h)^2 \\
+&= a^2 + 2ah + h^2
+\end{align*}
+Donc
+\begin{align*}
+\tau_a(h)
+&= \dfrac{f(a+h)-f(a)}{h} \\
+&= \dfrac{a^2 +2ah +h^2 - a^2}{h} \\
+&= \dfrac{2ah + h^2}{h} \\
+&= 2a + h
+\end{align*}
+Donc
+$$\tau_a(f) \xrightarrow[h\to 0]{} f'(a)=2a$$
+\end{exem}
+
+\medskip
+
+\begin{rem}
+Graphiquement, $f'(a)$ est le coefficient directeur de la tangente à la courbe représentative de la fonction $f$ au point $a$.
+\end{rem}
+
+\newpage
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{defi}[Dérivée $k$\up{ème}]
+Si $f'$ est dérivable sur $I$, on note \textcolor{red}{$f''$} ou \textcolor{red}{$f^{(2)}$} la dérivée de $f'$ et on l'appelle \textcolor{red}{\textbf{la dérivée seconde}} de $f$.\\
+De même si $f''$ est dérivable sur $I$, $f'''$ ou $f^{(3)}$ est la dérivée de $f''$.\\
+Plus généralement, on note \textcolor{red}{$f^{(k)}$ \textbf{la dérivée $k$\up{ème} de $f$}} avec la convention $f^{(0)}=f$ et $f^{(k+1)} = \left(f^{(k)}\right)'$.
+\end{defi}
+\end{minipage}}
+
+\medskip
+
+\begin{exem}
+Soit $f(x)=x^2$ sur $\mathbb{R}$.
+\begin{align*}
+f'(x)&=2x\\
+f''(x)&= 2 \\
+f^{(3)} &= 0 \\
+f^{(k)} &= 0 \qquad \text{pour tout } k\geq 3
+\end{align*}
+\end{exem}
+
+\medskip
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{defi}[Fonction de classe $\mathcal{C}^n$, fonction de classe $\mathcal{C}^\infty$]
+On dit que $f$ est de \textbf{\textcolor{red}{classe $\mathcal{C}^n$}}, $n\in\mathbb{N}$, sur $I$ si, et seulement si, $f$ est $n$ fois dérivable et ses $n$ dérivées sont continues sur $I$.\\
+On remarque que si $f^{(n+1)}$ existe alors $f^{(n)}$ existe et est continue. $f$ est alors de classe $\mathcal{C}^n$ sur $I$ ce qui s'écrit $f\in\mathcal{C}^n(I)$.\\
+On dit que $f$ est de \textbf{\textcolor{red}{classe $\mathcal{C}^\infty$}} sur $I$ si $f$ est indéfiniment dérivable (et que toutes ses dérivées sont continues).
+\end{defi}\end{minipage}}
+
+\medskip
+
+\begin{exem}
+D'après l'exemple précédent, la fonction $f(x)=x^2$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{R}$.\\
+Prenons la fonction $g(x)=\sqrt{x}$ sur $\mathbb{R}_+$. Cette fonction est continue sur $\mathbb{R}_+$, par contre sa dérivée $g'(x)=\dfrac{1}{2\sqrt{x}}$ n'est pas définie en $0$ et donc n'est pas continue en $0$.\\
+La fonction $g(x)=\sqrt{x}$ est de classe $\mathcal{C}^0$ sur $\mathbb{R}_+$; par contre, si on supprime la valeur $0$, la fonction $g$ est de classe $\mathcal{C}^\infty$ sur $\mathbb{R}_+^*$.
+\end{exem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Polynôme de Taylor}
+
+\textit{Brook Taylor, 18 août 1685 - 29 décembre 1731,  homme de science anglais. Principalement connu comme mathématicien, il s'intéressa aussi à la musique, à la peinture et à la religion.}\\
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{theo}[Polynôme de Taylor]
+Soit $I$ un intervalle, soit $f$ une fonction de $I$ vers $\mathbb{R}$ de classe $\mathcal{C}^n$ avec $n\in\mathbb{N}$ et soit $a$ un élément de $I$.\\
+Il existe un \textbf{unique} polynôme $T_{n,a}$ de degré au plus $n$ dont les dérivées jusqu'à l'ordre $n$ coïncident en $a$ avec celles de $f$. De plus :
+$$T_{n,a}(x)  = f(a) + (x-a)f'(a) + \dfrac{(x-a)^2}{2!}f''(a) + \dfrac{(x-a)^3}{3!}f^{(3)}(a) + ... + \dfrac{(x-a)^n}{n!} f^{(n)}(a)$$ 
+\end{theo}\end{minipage}}
+
+\medskip
+
+\begin{exem}
+Reprenons la fonction $g(x)=\sqrt{x}$ de classe $\mathcal{C}^\infty$ sur $\mathbb{R}_+^*$. Nous allons créer son polynôme de Taylor de degré 2 en $a=1$.
+$$ T_{2,1}(x)  = g(1) + (x-1)g'(1) + \dfrac{(x-1)^2}{2!}g''(1)$$
+Calculons les 2 premières dérivées successives :
+\begin{align*}
+g(x) &= \sqrt{x} 								&g(1)&= 1\\
+g'(x)&= \dfrac{1}{2\sqrt{x}} 		&g'(1)&=\dfrac{1}{2} \\
+g''(x)&= -\dfrac{1}{4x\sqrt{x}} &g''(1)&=-\dfrac{1}{4}
+\end{align*}
+Et donc :
+\begin{align*}
+T_{2,1}(x) 
+&= g(1) + (x-1)g'(1) + \dfrac{(x-1)^2}{2!}g''(1) \\
+&=1 + (x-1)\times \dfrac{1}{2} + \dfrac{(x-1)^2}{2} \times \left(-\dfrac{1}{4}\right)\\
+&=\dfrac{8 + 4\times(x-1)- (x-1)^2}{8}\\
+&=\dfrac{8 + 4x -4 -x^2 +2x -1}{8}\\
+&=\dfrac{-x^2 +6x +3}{8} 
+\end{align*}
+D'après Taylor et son théorème, ce polynôme et ses deux premières dérivées successives coïncident avec respectivement la fonction $g$ et ses deux premières dérivées successives au point $a=1$. Vérifions :
+\begin{align*}
+T_{2,1}(x) &= \dfrac{1}{8}(-x^2 +6x +3) & T_{2,1}(1) &=\dfrac{1}{8}(-1+6+3) = \textcolor{red}{1} & g(1)&=\textcolor{red}{1} \\
+T_{2,1}'(x) &= \dfrac{1}{8}(-2x +6) & T_{2,1}'(1) &=\dfrac{1}{8}(-2+6) = \textcolor{red}{\dfrac{1}{2}} & g'(1)&=\textcolor{red}{\dfrac{1}{2}} \\
+T_{2,1}''(x) &= \dfrac{1}{8}(-2) = -\dfrac{1}{4} & T_{2,1}''(1) &=\textcolor{red}{-\dfrac{1}{4}} & g''(1)&=\textcolor{red}{-\dfrac{1}{4}}
+\end{align*}
+\end{exem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{My Taylor is rich}
+
+\textit{Pardon pour cette vieille blague que seules les personnes de plus de 40 ans peuvent comprendre ... et encore ...\\ Je n'ai pas pu résister.}\\
+
+Comme le polynôme de Taylor \og se comporte\fg{} comme la fonction au voisinage de $a$, et si vous commencez à comprendre un peu de quoi il retourne dans cette matière, on ne peut pas se contenter de dire
+$$\text{Pour tout } x \text{ au voisinage de } a, \quad T_{n,a}(x) \approx f(x).$$
+Nous avons besoin de maîtriser l'erreur commise en remplaçant $f(x)$ par $T_{n,a}(x)$. C'est pourquoi nous avons, non pas 1, ni 2, ni 3, mais bien 4 théorèmes sur le sujet.
+
+\medskip
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{theo}[Formule de Taylor-Lagrange]
+Si $f$ est de classe $\mathcal{C}^n$ sur $[a,x]$ et si $f^{(n+1)}$ existe sur $]a,x[$ alors il existe au moins un réel $c\in]a,x[$ tel que :
+$$f(x) = T_{n,a}(x) + \dfrac{(x-a)^{n+1}}{(n+1)!} f^{(n+1)}(c)$$
+On dit que l'on écrit la \textcolor{red}{\textbf{formule de Taylor-Lagrange à l'ordre $n$}}.
+\end{theo}\end{minipage}}
+
+\medskip
+
+En prenant $a=0$ dans la formule de Taylor-Lagrange, nous obtenons :
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{theo}[Formule de Taylor-Mac Laurin]
+Si $f$ est de classe $\mathcal{C}^n$ sur $[0,x]$ et si $f^{(n+1)}$ existe sur $]0,x[$ alors il existe au moins un réel $\theta\in]0,1[$ tel que :
+$$f(x) = \sum_{k=0}^n \dfrac{x^k}{k!} f^{(k)} (0) + \dfrac{x^{n+1}}{(n+1)!} f^{(n+1)}(\theta x)$$
+\end{theo}\end{minipage}}
+
+\medskip
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{theo}[Formule de Taylor avec reste intégral]
+Si $f$ est de classe $\mathcal{C}^{n+1}$ sur $I$ contenant $a$ :
+$$\forall x\in I, \quad f(x)=T_{n,a}(x) + \int_a^x \dfrac{(x-t)^n}{n!} f^{(n+1)}(t)dt$$
+\end{theo}\end{minipage}}
+
+\medskip
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{theo}[Formule de Taylor-Young]
+Si $f$ est de classe $\mathcal{C}^n$ sur un intervalle $I$ contenant $a$ alors :
+$$\forall x \in I, \quad f(x) = T_{n,a}(x) + o((x-a)^n)$$
+\end{theo}\end{minipage}}
+
+\medskip
+
+Pour un peu mieux interpréter cette dernière formule, il peut être utile de rappeler la définition du symbole $o$.
+
+\fbox{\begin{minipage}{0.9\textwidth} 
+\begin{defi}[Petit $o$]
+$f=o(g)$ si, et seulement si, pour toute constante positive $\varepsilon$, il existe un entier $n_0$ tel que, pour tout $n\geq n_0$,
+$$|f(n)| \leq \varepsilon |g(n)|$$
+On dit alors que \textcolor{red}{$f$ \textbf{est négligeable devant }$g$}.
+\end{defi}\end{minipage}}
+
+\medskip
+
+\begin{rem}
+Contrairement au polynôme de Taylor, il ne sera pas demandé de connaître ces 4 théorèmes.\\
+Ce qu'il faut retenir c'est que 
+\begin{enumerate}
+	\item le polynôme de Taylor est un \textbf{polynôme} ! Ça n'a l'air de rien, mais c'est quand même plus facile de manipuler un polynôme qu'une fonction quelconque.
+	\item le polynôme de Taylor $T_{n,a}$ est \textbf{le polynôme de degré au plus $n$} qui approche le mieux la fonction $f$ au voisinage de $a$.
+	\item on maîtrise parfaitement l'erreur\footnote{Attention ! Je parle de l'erreur théorique. Il ne faudra pas oublier de rajouter l'erreur de la machine.} que l'on commet en remplaçant $f$ par $T_{n,a}$.
+	\item plus $n$ est grand, moins l'erreur est importante. Attention néanmoins, plus $n$ est grand plus vous devez faire de calculs pour obtenir votre polynôme de Taylor, puis pour l'évaluer.\\
+				Ce sera le problème principal de ce cours, chercher la méthode la plus efficace : le moins de calculs possible pour la plus grande précision.\\
+				Il y aussi une remarque importante, comme Scilab n'offre pas une précision supérieure à $10^{-16}$, il existe un rang $n$ qu'il n'est pas nécessaire de dépasser.
+\end{enumerate}
+
+Nous allons voir tout ça en reprenant notre exemple de la fonction $g(x)=\sqrt{x}$.
+\end{rem}
+
+\medskip
+
+\begin{exem}
+\begin{itemize}
+	\item Je veux calculer $\sqrt{1,1}$ à la main\footnote{En voilà une idée !??? Il n'a pas une calculatrice comme tout le monde ?}. Comme 1,1 est assez proche de 1, je vais plutôt choisir de prendre le polynôme de Taylor d'ordre 2 en 1 de la fonction $g(x)=\sqrt{x}$ que nous avions calculer dans la section précédente :
+\begin{align*}
+T_{2,1}(x) 
+&= \dfrac{1}{8}(-x^2+6x+3) \\
+T_{2,1}(1,1) 
+&= \dfrac{1}{8}(-1,1^2+6\times 1,1+3) \\
+&= \dfrac{1}{8}(-1,21+6,6+3) \\
+&= \dfrac{1}{8}\times 8,39 \\
+&= 1,048~75
+\end{align*}
+ \item Mais \textbf{JE SAIS} que j'ai commis une erreur. D'après la formule de Taylor-Lagrange, cette erreur est majorée par 
+			$$\left|\dfrac{(x-a)^{n+1}}{(n+1)!} g^{(n+1)}(c)\right| \quad \text{ avec  }c\in]a;x[, \quad a=1, \quad x=1,1 \quad \text{ et } n+1=3.$$
+			Autrement dit
+			$$\left|\dfrac{0,1^{3}}{3!} g^{(3)}(c)\right| \quad \text{ avec  }c\in]1;1,1[$$
+			Calculons $g^{(3)}$.
+			$$g^{(3)}(x) = \dfrac{3}{8}\dfrac{\sqrt{x}}{x^3}$$
+			C'est une fonction positive et décroissante; sur $]1;1,1[$ elle majorée par son évaluation en 1, i.e. $g^{(3)}(1) = \dfrac{3}{8}$.\\
+L'erreur commise est donc majorée par
+$$\left|\dfrac{0,1^{3}}{3!} g^{(3)}(c)\right| \leq \dfrac{0,1^3}{3\times 2 \times 1} \times \dfrac{3}{8} = \dfrac{0,001}{16} = 0,000~006~25$$
+ \item On peut alors effectuer un encadrement de $\sqrt{1,1}$ :
+\begin{align*}
+T_{2,1}(1,1)-0,000~062~5 &\leq \sqrt{1,1} \leq T_{2,1}(1,1)+0,000~062~5 \\
+1,048~75-0,000~062~5 &\leq \sqrt{1,1} \leq 1,048~75+0,000~062~5 \\
+1,048~687~5 &\leq \sqrt{1,1} \leq 1,048~812~5
+\end{align*}
+Vérification faite à la calculatrice\footnote{Oui, j'utilise parfois la calculatrice.} : $\sqrt{1,1} = 1,048~808~848~2 ...$. J'ai obtenu 3 décimales exactes avec un calcul relativement simple.\\
+
+
+	\item Sinon, en constatant que l'erreur commise est majorée par $\left|\dfrac{0,1^{n+1}}{(n+1)!} g^{(n+1)}(c)\right|$, pour $n$ suffisamment grand, on peut dire que cette erreur est de l'ordre de $\dfrac{0,1^{n+1}}{(n+1)!}$. On dépasse largement les $10^{-16}$ dès $n\geq 10$. Il ne sert à rien pour calculer $\sqrt{1,1}$ avec Scilab de chercher le polynôme de Taylor d'un ordre supérieur à 10. 
+	\\Vous vérifierez ça par vous-même dans l'exercice 4.
+	
+\end{itemize}
+\end{exem}
+
+\medskip
+
+\begin{center}
+	\includegraphics[width=0.35\textwidth]{01-Serie-de-Taylor/images/super_calculator.jpg}
+\end{center}
+
+

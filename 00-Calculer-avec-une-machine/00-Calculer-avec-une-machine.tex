@@ -1,0 +1,122 @@
+\chapter{Calculer avec une machine}
+
+\section*{Avertissements}
+L'ensemble de ce chapitre est fortement inspiré par le cours de Guillaume CONNAN donné à l'IUT de Nantes :\\
+\url{http://informathix.tuxfamily.org/?q=node/182}\\
+La première section sur la norme IEEE 754 de ce chapitre n'est qu'un résumé\footnote{Quelle honte !} de l'article wikipédia sur le sujet. Les graphiques sont eux aussi issus de cet article :\\
+\url{https://fr.wikipedia.org/wiki/IEEE_754}
+
+
+\section{La norme IEEE 754}
+Une machine n'a pas une mémoire infinie et ne peut donc pas gérer les nombres réels avec une partie décimale infinie, comme par exemple $\pi, \sqrt{2}, \sqrt{3}, ..., e, \cos(1), ...$ La machine travaille donc avec ce qu'on appelle des \textbf{nombres à virgule flottante}, ce qui correspond à ce que nous appelons, en mathématique, la notation scientifique.\\
+Par exemple, le nombre $0,000~145~879$ s'écrit en notation scientifique sous la forme $1,458~79\times 10^{-4}$.\\
+Un nombre à virgule flottante part du même principe, mais en binaire.\\
+
+Après quelques tentatives et hésitations, la norme IEEE 754 s'est imposée. C'est une norme pour la représentation des nombres à virgule flottante en binaire. Son nom complet est \textit{IEEE Standard for Binary Floating-Point Arithmetic (ANSI/IEEE Std 754-1985)}, autrement dit, norme IEEE pour l'arithmétique binaire en virgule flottante.\\
+
+Le format général d'un nombre flottant est formé de trois éléments : la mantisse (m bits), l'exposant (e bits) et le signe (1 bit).\\
+\begin{center}
+	\includegraphics[scale=1]{00-Calculer-avec-une-machine/images/IEEE754_Format_General.png}
+\end{center}
+L'interprétation d'un nombre est donc :
+$$\text{valeur} = \text{signe} \times \text{mantisse}\times 2 ^{\text{ exposant} - \text{décalage}}$$
+avec
+\begin{itemize}
+	\item \textit{décalage }$=2^{e-1}-1$ qui permet de gérer le signe de l'exposant.
+\end{itemize}
+
+
+A cela, on ajoute trois cas particuliers :
+\begin{itemize}
+	\item si l'exposant et la mantisse sont tous deux nuls, le nombre est $\pm 0$, selon le bit de signe.
+	\item si l'exposant est égal à $2^e -1$ et si la mantisse est nulle, le nombre est $\pm$ infini, selon le bit de signe.
+	\item si l'exposant est égal à $2^e -1$, mais que la mantisse n'est pas nulle, le nombre est NaN, \textit{not a number}.
+\end{itemize}
+
+\newpage
+\subsection*{Format simple précision (32 bits)}
+Il s'agit d'un nombre à virgule flottante stocké sur 32 bits. En \textit{Java} ce n'est rien d'autre que notre \textit{float}.
+\begin{center}
+	\includegraphics[scale=1]{00-Calculer-avec-une-machine/images/IEEE754_simple_precision.png}
+\end{center}
+\begin{itemize}
+	\item 1 bit pour le signe
+	\item 8 bits pour l'exposant
+	\item 23 bits pour la mantisse
+	\item l'exposant est décalé de $2^{8-1}-1 = 127$. Ainsi l'exposant d'un nombre normalisé va donc de -126 à +127.\\
+				L'exposant décalé -127 est réservé pour zéro.\\
+				L'exposant décalé +128 est réservé pour les infinis et les Nan.
+\end{itemize}
+
+\medskip
+
+Par exemple le nombre \textcolor{yellow}{0} \textcolor{green}{01111100} \textcolor{blue}{01000000000000000000000} :
+\begin{itemize}
+	\item le signe \textcolor{yellow}{0} est nul, il s'agit d'un nombre positif
+	\item l'exposant \textcolor{green}{01111100} équivaut à 124 en écriture décimal. Avec le décalage, on obtient : 124 - 127 = -3
+	\item la mantisse \textcolor{blue}{01000000000000000000000} signifie que la partie significative en binaire est de \\
+	1,\textcolor{blue}{01000000000000000000000}=1,01. Ce qui équivaut en écriture décimal à $1\times 2^0 + 0\times 2^{-1} + 1 \times 2^{-2} = 1,25$.
+\end{itemize}
+Le nombre représenté par \textcolor{yellow}{0} \textcolor{green}{01111100} \textcolor{blue}{01000000000000000000000} est $1,25\times 2^{-3} = 0,15625$.\\
+
+\medskip
+
+Le format simple précision permet d'obtenir des nombres entre $\approx\pm 10^{-40}$ et $\pm 10^{40}$ avec 6 ou 7 décimales.\\ 
+
+
+
+\subsection*{Format double précision (64 bits)}
+Il s'agit d'un nombre à virgule flottante stocké sur 64 bits. En \textit{Java} ce n'est rien d'autre que notre bon vieux \textit{double}, en \textit{Python 3}, il s'agit du type \textit{float} .
+\begin{center}
+	\includegraphics[scale=1]{00-Calculer-avec-une-machine/images/IEEE754_double_precision.png}
+\end{center}
+\begin{itemize}
+	\item 1 bit pour le signe
+	\item 11 bits pour l'exposant
+	\item 52 bits pour la mantisse
+	\item l'exposant est décalé de $2^{11-1}-1 = 1023$. Ainsi l'exposant d'un nombre normalisé va donc de -1022 à +1023.\\
+\end{itemize}
+
+\medskip
+
+Le format double précision permet d'obtenir des nombres entre $\approx\pm 10^{-300}$ et $\pm 10^{300}$ avec 14 ou 15 décimales.\\
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calculer avec une virgule flottante}
+Il faut bien avoir en tête que pour la machine les nombres réels n'existant pas, tout n'est que troncatures, arrondis, approximations et donc ... \textbf{erreurs} ! Les machines calculent très vite et si on effectue à chaque étape de toutes petites erreurs, un grand nombre d'étapes peuvent provoquer une grosse erreur. Certaines erreurs sont faciles à obtenir, mais d'autres sont plus difficiles à traquer. Soyez donc vigilants\footnote{Je ne parle même pas de l'étudiant qui peut lui aussi se tromper. Si, si, ça c'est déjà vu.}\\
+
+\newpage
+
+Voici par exemple ce que fait notre ami Google :
+\begin{center}	\includegraphics[scale=0.25]{00-Calculer-avec-une-machine/images/google.png}\end{center}
+Même notre nouvel ami Qwant fait de même, mais avec une \og meilleure précision\fg. Il obtient le résultat : 
+$$-3,6082248300318\times 10^{-16}$$
+Heureusement Bing lui au moins sait faire ce genre de calcul :
+\begin{center}	\includegraphics[scale=0.25]{00-Calculer-avec-une-machine/images/bing.png}\end{center}
+On doit pouvoir néanmoins le mettre en défaut. Avis aux amateurs !\\
+
+Continuons avec nos logiciels préférés. Calc de LibreOffice 5.1.5.2 ne s'en sort pas mieux :
+\begin{center}	\includegraphics[scale=0.75]{00-Calculer-avec-une-machine/images/libre_office.png}\end{center}
+Que donne le super logiciel de calcul Scilab 5.5.2 (ou Python 3)?
+\begin{center}	\includegraphics[scale=0.7]{00-Calculer-avec-une-machine/images/scilab1.png}\end{center}
+
+Bon ça ne s'arrange pas. Essayons avec une bonne vieille calculatrice. Ici, il s'agit de la TI83 Premium CE :
+\begin{center}	\includegraphics[scale=0.4]{00-Calculer-avec-une-machine/images/TI83.png}\end{center}
+
+On peut très sincèrement se demander quel est l'intérêt du logiciel Scilab sur ses \og concurrents directs\fg{} que sont Calc ou la calculatrice. Scilab gère nettement mieux que la calculatrice les calculs avec de très petits (ou de très grands) nombres .\\
+\begin{center}	\includegraphics[scale=0.45]{00-Calculer-avec-une-machine/images/TI83_2.png}\end{center}
+Alors que notre désormais nouvel ami Scilab :
+\begin{center}	\includegraphics[scale=0.7]{00-Calculer-avec-une-machine/images/scilab2.png}\end{center}
+Enfin, comme vous le verrez, la programmation avec Scilab\footnote{Les personnes désirant jeter de l'argent par les fenêtres préfèrent largement Matlab. La version standard coûte 2~000 euros.\newline Scilab est utilisé notamment par Airbus, CEA, CNES, EDF, Peugeot, SANOFI, Total, Valeo, ..\newline On pourra visiter le site Scilab Industry pour plus d'information à ce sujet : \url{http://scilab.io/by-industry/aerospace/}.\\ Scilab est désormais concurrencé par le langage Python 3. Le code est très similaire, mais avec lui on peut faire autre chose que des maths...} est bien plus facile qu'avec Calc (ou  même la TI).\\
+Par défaut le \og zéro\fg{} d'une machine vaut environ $2,220\times 10^{-16}$. Cela vient du fait que la mantisse a 53 bits ce qui correspond en gros à 16 chiffres décimaux. Ce nombre est donné par la commande \textbf{\%eps} (pour \textbf{eps}ilon) :
+\begin{center}	\includegraphics[scale=0.7]{00-Calculer-avec-une-machine/images/scilab_eps.png}\end{center}
+Nous ferons connaissance avec ce nombre dans l'exercice 2.\\
+
+
+\begin{center}	\includegraphics[scale=0.8]{00-Calculer-avec-une-machine/images/humour1.png}\end{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+

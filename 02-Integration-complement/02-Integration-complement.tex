@@ -1,0 +1,35 @@
+\section{\textit{Complément sur l'intégration numérique :} La méthode de Monte-Carlo}
+
+\subsection*{Introduction}
+Supposons que l'on souhaite calculer l'aire de l'étang St Nicolas. La forme n'est pas très régulière et le calcul intégral \og \textit{classique}\fg~ne semble pas le plus indiqué.\\
+Ou pourrait pourtant imaginé une solution relativement simple :
+\begin{itemize}
+	\item on connaît l'aire de la carte $\mathcal{A}_{\text{carte}}$;
+	\item on cherche à calculer l'aire de l'étang $\mathcal{A}_{\text{étang}}$;
+	\item on lance $N$ petits cailloux totalement au hasard sur la carte;
+	\item parmi ces $N$ cailloux, on compte le nombre $n$ de ceux qui sont dans le lac.
+\end{itemize}
+Plus $N$ est grand plus on a :
+$$\dfrac{n}{N} \approx \dfrac{\mathcal{A}_{\text{étang}}}{\mathcal{A}_{\text{carte}}}$$
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.5\textwidth]{02-Integration-complement/images/EtangStNicolas.png}
+	\caption{L'étang St Nicolas}
+	\label{fig:EtangStNicolas}
+\end{figure}
+
+Cette méthode probabiliste est très efficace pour effectuer des calculs d'aires aux contours trop tourmentés. On l'a nommé \textbf{Méthode de Monte-Carlo} en référence au célèbre Casino de la principauté de Monaco.\\
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.40\textwidth]{02-Integration-complement/images/SeanConneryDrNo.jpg}
+	\caption{Un célèbre mathématicien en plein calcul intégral}
+	\label{fig:SeanConneryDrNo}
+\end{figure}
+
+L'estimation de l'erreur est beaucoup plus difficile à déterminer et il faut plutôt être un spécialiste du calcul probabiliste. Sachez seulement qu'avec cette méthode, on ne sera jamais assuré d'avoir le bon résultat. En outre l'estimation de l'erreur est impossible à faire de manière sûre. On peut par contre calculer le nombre de lancer de cailloux à faire pour que l'erreur soit \textit{probablement} inférieur à une valeur donnée...\\
+Cela semble assez logique, puisque l'on place des points au hasard, il est possible que l'on se trompe un peu.\\
+
+Pour une bonne utilisation de cette méthode, on doit générer des nombres aléatoires dont la qualité influence la précision du calcul. Le problème c'est qu'il n'est pas possible de créer avec un algorithme une suite de nombres parfaitement aléatoires. On se contente donc de générer des nombres pseudo-aléatoires avec un ordinateur ou une calculatrice.\\
+On pourra voir l'intéressant article wikipédia sur le sujet des nombres pseudo-aléatoires :\\
+\url{https://fr.wikipedia.org/wiki/G%C3%A9n%C3%A9rateur_de_nombres_pseudo-al%C3%A9atoires} sur ce sujet très intéressant.

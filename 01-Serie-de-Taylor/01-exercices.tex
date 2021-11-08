@@ -1,0 +1,53 @@
+\section{Exercices}
+\setcounter{exer}{0}
+
+\begin{exer}[Polynôme de Taylor]
+\begin{enumerate}
+	\item Trouver le polynôme de Taylor à l'ordre 3 en 0 de la fonction exponentielle.
+	\item Vérifier que les dérivées $k$\up{ème} du polynôme obtenu et de la fonction exponentielle coïncident en 0, pour $0\leq k \leq 3$.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}[Polynôme de Taylor suite ...]
+En utilisant votre polynôme de Taylor à l'ordre 3 au voisinage de 0 de la fonction exponentielle, calculer une approximation de $e^{0,1}$ et majorer l'erreur commise.\\
+De même calculer une approximation de $e^{1}$ avec le même polynôme de Taylor. Commenter le résultat.
+\end{exer}
+
+\medskip
+
+\begin{exer}[... et fin]
+Écrire la formule de Taylor-Lagrange à l'ordre 4 pour les fonctions suivantes dans un voisinage de 0.
+\begin{enumerate}
+\begin{tabularx}{\textwidth}{XXX}
+\item $f(x)=\dfrac{1}{1-x}$ & \item $g(x)=\ln(1+x)$ & \item $h(x)=\sin(2x)$ \\
+\end{tabularx}
+\end{enumerate}
+\end{exer}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exer}[Scilab]
+Trouver à partir de quel rang $n$ le terme $\dfrac{0,1^n}{n!}$ est inférieur à \textbf{\%eps}.
+\end{exer}
+
+
+\begin{exer}[Polynôme de Taylor avec Scilab]
+Tracer dans un même graphique la fonction exponentielle et son polynôme de Taylor à l'ordre 3 au voisinage de 0 sur l'intervalle $[-1;1]$ puis sur l'intervalle $[-5;5]$. 
+\end{exer}
+
+\begin{exer}[Fonction homographique avec Scilab]
+Une fonction homographique est une fonction de la forme $x\mapsto \dfrac{ax+b}{cx+d}$ avec $a,b,c$ et $d$ des réels.\\
+\begin{enumerate}
+	\item Notons $g$ la fonction homographique correspondant au cas $a=0, b=d=1$ et $c=-1$.\\
+				Quel est l'ensemble de définition de la fonction $g$ ?
+	\item Calculer $g'(x), g''(x), g^{(3)}(x)$ et plus généralement $g^{(n)}(x)$.
+	\item Écrire le plus simplement possible $T_{5,0}(x)$, le polynôme de Taylor à l'ordre 5 au voisinage de 0 de la fonction $g$.
+	\item Sur un même graphique, donner l'allure des courbes représentatives de $g$ et de $T_{5,0}$ avec Scilab.
+	\item Soit $h(x)=\dfrac{5-3x}{1-x}$.\\
+				Montrer qu'il existe deux réels $\alpha$ et $\beta$ tels que $h(x)=\alpha + \dfrac{\beta}{1-x}$.\\
+				En déduire $U_{5,0}(x)$, le polynôme de Taylor à l'ordre 5 au voisinage de 0 de la fonction $h$ pour $x$ appartenant à un bon intervalle.
+\end{enumerate}
+\end{exer}
+
+
