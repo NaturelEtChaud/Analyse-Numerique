@@ -15,6 +15,6 @@ C'est certain, il reste quelques coquilles ou fautes de frappe. Soyez indulgent.
 ---
 Si un jour j'ai le temps, je réécrirai mes codes en Python.
 
-J'avais aussi dans l'idée de programmer en P5JS le mouvement du pendule d'après son équation différentielle vue par la méthode d'Euler puis par la méthode de Runge-Kutta pour bien interpréter l'erreur commise par la méthode d'Euler.
+J'avais aussi dans l'idée de programmer en P5JS le mouvement du pendule d'après son équation différentielle vue par la méthode d'Euler puis par la méthode de Runge-Kutta pour bien visualiser et interpréter l'erreur commise par la méthode d'Euler.
 
 ---
